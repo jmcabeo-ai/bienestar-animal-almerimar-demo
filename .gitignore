@@ -1,0 +1,10 @@
+PROGRESS.md
+CONFIG_GHL_DEMO.md
+.internal/
+tests/screenshots/
+__pycache__/
+assets/centro.webp
+assets/traumatologia.webp
+assets/clinica-01.webp
+assets/clinica-02.webp
+assets/clinica-03.webp
