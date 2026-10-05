@@ -36,6 +36,13 @@ test('Carga de proveedores solo tras activación explícita, sin credenciales', 
   assert.ok(!/PRIVATE.*TOKEN|Bearer |api[_-]?key\s*[:=]/i.test(html+js));
   assert.match(js,/location.reload\(\)/);
 });
+test('Prueba administrativa con motivo, reserva CRM y email informado', () => {
+  assert.match(html,/motivo de consulta, mascota y datos administrativos/);
+  assert.match(html,/propio correo/);
+  assert.match(html,/avisos administrativos reales/);
+  assert.match(html,/no cancela la cita, los avisos programados/);
+  assert.match(js,/motivo, nombre y especie de la mascota, propietario y teléfono/);
+});
 test('Accesibilidad y movimiento móvil con alternativa reducida', () => {
   assert.match(html,/lang="es"/); assert.match(html,/skip-link/);
   assert.match(html,/aria-live="polite"/); assert.match(html,/aria-controls="main-nav"/);

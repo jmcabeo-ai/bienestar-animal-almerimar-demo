@@ -10,12 +10,13 @@ Sin compilación, claves privadas o backend propio. Chat y voz se cargan exclusi
 
 ## Límites
 
-- Solo datos inventados y agenda ficticia. Ninguna cita llega a la clínica.
+- Agenda aislada de demostración. La reserva se crea realmente en el CRM de prueba; ninguna cita llega a la clínica. Usa datos de ejemplo y tu propio correo si deseas recibir la confirmación.
+- El asistente recoge motivo, mascota/especie, propietario, teléfono y correo para la confirmación, pide validar el resumen y consulta el calendario antes de reservar. El responsable recibe un aviso independiente.
 - Sin conexión a teléfono, WhatsApp, calendarios o pacientes reales.
 - Asistente administrativo: no diagnostica, prescribe ni presta atención urgente.
 - Recorrido de cinco pasos: simulación local separada, sin envíos ni reservas.
 - Cancelaciones y cambios solo realizados tras confirmación de la herramienta.
-- Recordatorios y automatizaciones: posibilidades futuras, no envíos activados.
+- Correos administrativos activados: confirmación, cambio y cancelación al cliente y al responsable; recordatorio al cliente 24 horas antes. SMS y WhatsApp desactivados. Las demás automatizaciones de captación o fidelización son propuestas, no funciones conectadas.
 - Horarios publicados discrepantes: confirmar con el centro.
 - Sin reseñas inventadas, nombres de equipo, precios o cifras sin verificar.
 

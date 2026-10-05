@@ -48,11 +48,11 @@
   }));
 
   const steps = [
-    ['«Me gustaría pedir una cita para Luna.»', 'La recepción explica el siguiente paso y recoge solo los datos administrativos necesarios. Aquí, Luna y su familia son inventadas.'],
+    ['«Luna necesita su revisión anual.»', 'La recepción recoge el motivo, nombre y especie de la mascota, propietario y teléfono. Para recibir la confirmación de prueba, puedes facilitar tu propio correo. No pide diagnósticos ni informes.'],
     ['«En este ejemplo: martes, 10:00 o 11:00.»', 'Son horarios escritos para esta simulación local, no disponibilidad del centro ni de la agenda de IA. En el asistente, los huecos se consultan mediante la herramienta del calendario ficticio.'],
-    ['«Confirmo la cita ficticia de las 11:00.»', 'El sistema solicitaría confirmación antes de crear una reserva. En este recorrido no se guarda nada: es una vista previa local. La prueba de chat utiliza una agenda distinta y debe confirmar la operación con su herramienta.'],
-    ['«Ejemplo: recuerda tu cita de mañana.»', 'Vista previa de un recordatorio que se podría configurar tras validar horarios, canal y consentimiento. Este recorrido no envía correo, SMS o WhatsApp, y en la cuenta demo los avisos externos están desactivados.'],
-    ['«Necesito cancelar mi cita de prueba.»', 'Ejemplo del flujo deseado: identificar la cita propia, pedir confirmación, liberar el hueco y notificar el resultado. Aquí no se modifica ninguna cita. El asistente solo puede actuar si tiene habilitada y validada esa herramienta.']
+    ['«Confirmo los datos y la cita de prueba.»', 'En el asistente, la reserva se registra realmente en el CRM de demostración: el propietario recibe su confirmación por correo y el responsable un aviso independiente. Este recorrido local no guarda ni envía nada.'],
+    ['«Ejemplo: recuerda tu cita de mañana.»', 'Vista previa del recordatorio administrativo por correo, según las reglas de la agenda de prueba. Este recorrido local no envía mensajes. No hay SMS ni WhatsApp conectados.'],
+    ['«Necesito cambiar o cancelar mi cita de prueba.»', 'El asistente identifica tu cita, confirma el cambio y actualiza la agenda conectada. Los avisos de cambio o cancelación llegan al cliente y al responsable por correo. Este recorrido local no modifica ninguna reserva.']
   ];
   let activeStep = 0;
   const showStep = index => {
@@ -108,7 +108,7 @@
     try {
       await loadWidget(mode, id);
       loaded.set(mode, 'loaded');
-      $('#demo-status').textContent = mode === 'voice' ? 'Prueba de voz cargada. Pulsa el botón nativo y usa únicamente datos inventados. El navegador puede solicitar acceso al micrófono.' : 'Chat cargado. Abre la burbuja y usa únicamente datos inventados. Puede tardar unos segundos en aparecer.';
+      $('#demo-status').textContent = mode === 'voice' ? 'Voz cargada. Usa datos de ejemplo y, si quieres recibir la confirmación, tu propio correo. El navegador puede solicitar el micrófono.' : 'Chat cargado. Usa datos de ejemplo y tu propio correo si quieres recibir la confirmación de prueba. Abre la burbuja para conversar.';
       const button = $('[data-start-demo="' + mode + '"]');
       button.firstChild.textContent = mode === 'voice' ? 'Prueba de voz activada ' : 'Chat de prueba activado ';
       if (mode === 'chat') document.body.classList.add('chat-active');
