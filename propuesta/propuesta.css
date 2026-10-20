@@ -17,3 +17,79 @@
 @media(max-width:600px){.headline-prices{gap:16px;margin:23px 0 25px;grid-template-columns:1fr 1.05fr}.headline-prices .setup-price{font-size:65px}.headline-prices .setup-price>span{font-size:27px}.headline-prices .monthly-price{padding-left:16px}.headline-prices .monthly-price strong{font-size:38px}.headline-prices .monthly-price strong span{font-size:14px}.headline-prices .monthly-price>p{font-size:10px;line-height:1.8;min-width:0}.headline-prices .monthly-price>div>span{font-size:7px}}
 @media(max-width:360px){.headline-prices{gap:13px;grid-template-columns:1fr 1fr}.headline-prices .setup-price{font-size:58px}.headline-prices .setup-price>span{font-size:24px}.headline-prices .monthly-price{padding-left:13px}.headline-prices .monthly-price strong{font-size:36px}.headline-prices .monthly-price strong span{display:block;font-size:14px;line-height:1.5}.headline-prices .monthly-price>p{font-size:9px}}
 @media print{.headline-prices .setup-price{font-size:55px}.headline-prices .monthly-price{border-color:#aaa;padding-left:18px}.headline-prices .monthly-price>p{color:var(--muted);font-size:9px}}
+
+
+/* Offer: fixed service, AI allowances, unlimited option and itemised prepaid use. */
+.hero-allowance{font-size:12px;line-height:1.9;color:#edf1e5;margin:22px 0 0}
+.offer-card .external-note a{color:inherit;text-underline-offset:3px}
+.plan-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
+.plan-card{padding:32px;background:var(--paper);border:1px solid var(--line);border-radius:15px;min-width:0}
+.plan-card>.eyebrow{font-size:8px;line-height:1.8;display:block;margin-bottom:20px}
+.plan-card h3{font-size:35px;line-height:1.12;margin:0 0 20px}
+.plan-price{font:400 58px/1.1 var(--serif);letter-spacing:-.045em;margin:0}
+.plan-price span{font:400 13px/1.7 var(--sans);letter-spacing:0;margin-left:9px;white-space:nowrap}
+.plan-tax{font-size:11px;color:var(--muted);margin:10px 0 24px}
+.price-breakdown{border-block:1px solid var(--line);padding:8px 0;margin-bottom:22px}
+.price-breakdown p{display:grid;grid-template-columns:65px 1fr;gap:12px;align-items:baseline;font-size:12px;line-height:1.8;margin:10px 0}
+.price-breakdown b{font:400 23px var(--serif)}
+.plan-features{list-style:none;padding:0;margin:0 0 22px}
+.plan-features li{font-size:13px;line-height:1.85;margin:12px 0;padding-left:18px;position:relative}
+.plan-features li:before{content:'✓';position:absolute;left:0;color:var(--green)}
+.plan-overage{border-top:1px solid var(--line);padding-top:18px;font-size:13px}
+.plan-overage p,.plan-meta{font-size:12px;line-height:1.9;margin:9px 0 16px}
+.plan-meta a{color:inherit;text-underline-offset:3px}
+.plan-small{font-size:11px;line-height:1.9;color:var(--muted);margin:0}
+.unlimited-card{background:#e9eddc;border-color:#9baa87}
+.shared-plan-note{font-size:12px;line-height:1.9;color:var(--muted);margin:24px 0 46px;max-width:950px}
+.maintenance-caption{font-size:8px;line-height:1.8;display:block;margin-bottom:14px}
+.service-grid>div{min-width:0}
+.usage-label{font-size:12px;line-height:1.7;display:block;margin-top:18px}
+.usage-label input,.usage-label select{display:block;width:100%;min-width:0;min-height:46px;background:var(--paper);border:1px solid #193e3477;border-radius:8px;padding:10px 12px;font:400 14px/1.5 var(--sans);color:var(--ink);margin-top:7px}
+.usage-label select:disabled{opacity:.65}
+.usage-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.input-help{font-size:11px;line-height:1.85;color:var(--muted);margin:10px 0}
+.input-help a{color:var(--green);text-underline-offset:3px}
+.billing-result strong{font-size:44px}
+.billing-lines{margin:18px 0}
+.billing-lines>div{display:flex;justify-content:space-between;gap:16px;font-size:12px;line-height:1.8;padding:6px 0}
+.billing-lines dt{max-width:75%}
+.billing-lines dd{margin:0;text-align:right;white-space:nowrap;font-weight:500}
+.billing-lines .wallet-line{border-block:1px solid var(--line);padding-block:10px;margin-block:5px}
+.static-example{font-size:12px;line-height:1.9;margin:18px 0}
+.js .static-example{display:none}
+.meta-section,.expenses-section{padding-block:65px}
+.meta-intro{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.meta-intro p{font-size:14px;line-height:1.9;margin:0 0 25px}
+.meta-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+.meta-table{border-collapse:collapse;text-align:left;width:100%}
+.meta-table caption{font-size:11px;text-align:left;line-height:1.8;padding:17px;background:#e9eddc}
+.meta-table th,.meta-table td{padding:18px;border-top:1px solid var(--line);vertical-align:top;font-size:13px;line-height:1.85}
+.meta-table thead th{font-size:11px;background:#eef0e5}
+.meta-table th{font-weight:500}
+.meta-table th small{font-size:11px;font-weight:400;color:var(--muted)}
+.meta-table td:last-child{min-width:120px}
+.meta-footnote,.source-note{font-size:12px;line-height:1.9;color:var(--muted);margin:20px 0}
+.source-note{font-size:10px}
+.source-note a{color:var(--green);text-underline-offset:3px}
+.meta-examples{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;margin:35px 0}
+.meta-examples article{padding:22px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.meta-examples .eyebrow{font-size:8px;line-height:1.8}
+.meta-examples h3{font-size:26px;line-height:1.15;margin:16px 0}
+.meta-examples p{font-size:13px;line-height:1.85;margin:0}
+.wallet-section{background:#e9eddc;padding-block:60px}
+.wallet-steps{padding:0;margin:0;list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.wallet-steps li{border-top:1px solid #a3ae92;padding-top:20px}
+.wallet-steps li>span{font-size:10px}
+.wallet-steps h3{font-size:29px;line-height:1.2;margin:18px 0}
+.wallet-steps p,.wallet-rules p{font-size:13px;line-height:1.9;margin:0}
+.wallet-rules{border-top:1px solid #a3ae92;margin-top:30px;padding-top:23px;display:grid;gap:15px}
+.expense-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.expense-grid article{border-top:1px solid var(--line);padding-top:20px}
+.expense-grid h3{font-size:29px;line-height:1.2;margin:0 0 20px}
+.expense-grid ul{padding-left:17px;margin:0}
+.expense-grid li{font-size:13px;line-height:1.9;padding-left:3px;margin-bottom:15px}
+.expense-summary{font-size:12px;line-height:1.9;color:var(--muted);border-top:1px solid var(--line);margin:20px 0 0;padding-top:20px}
+@media(max-width:900px){.plan-card{padding:25px}.plan-card h3{font-size:31px}.plan-price{font-size:50px}.meta-examples{gap:15px}.meta-examples article{padding:18px}.wallet-steps,.expense-grid{gap:23px}}
+@media(max-width:700px){.plan-comparison,.meta-intro,.meta-examples,.wallet-steps,.expense-grid{grid-template-columns:1fr}.plan-card{padding:25px 22px}.plan-card h3{font-size:32px}.plan-price{font-size:54px}.plan-price span{font-size:12px}.plan-tax{font-size:12px}.price-breakdown p{font-size:13px}.plan-card>.eyebrow{font-size:8px}.plan-features li,.plan-overage p,.plan-meta,.shared-plan-note,.static-example,.wallet-steps p,.wallet-rules p,.expense-grid li{font-size:14px}.plan-small,.meta-footnote,.expense-summary{font-size:13px}.shared-plan-note{margin-bottom:30px}.meta-section,.expenses-section{padding-block:43px}.meta-intro{gap:0}.meta-table th,.meta-table td{font-size:12px;padding:12px}.meta-table caption{font-size:11px;padding:13px}.meta-table th small{font-size:10px}.meta-table td:last-child{min-width:90px}.meta-examples{gap:18px;margin:26px 0}.meta-examples h3{font-size:28px}.meta-examples p{font-size:14px}.source-note{font-size:11px}.wallet-section{padding-block:43px}.wallet-steps{gap:25px}.wallet-steps h3{font-size:30px}.wallet-rules{gap:20px}.expense-grid{gap:25px}.expense-grid h3{font-size:30px}.hero-allowance{font-size:12px}.usage-label{font-size:12px}.input-help{font-size:12px}.billing-lines>div{font-size:12px}.billing-result strong{font-size:43px}.maintenance-caption{font-size:9px}}
+@media(max-width:360px){.plan-card{padding:23px 18px}.plan-price{font-size:46px}.plan-price span{display:block;margin-left:0;margin-top:8px}.usage-inputs{grid-template-columns:1fr;gap:0}.meta-table th,.meta-table td{padding:10px 7px;font-size:11px}.meta-table td:last-child{min-width:75px}.billing-result strong{font-size:38px}}
+@media print{.plan-comparison{gap:18px}.plan-card{padding:18px;background:#fff;break-inside:avoid}.plan-card h3{font-size:26px}.plan-price{font-size:39px}.plan-price span{font-size:10px}.plan-features li,.plan-overage p,.plan-meta,.plan-small,.shared-plan-note,.static-example,.meta-intro p,.meta-footnote,.wallet-steps p,.wallet-rules p,.expense-grid li,.expense-summary{font-size:10px}.js .static-example{display:block}.hero-allowance{color:var(--ink);font-size:10px}.meta-section,.wallet-section,.expenses-section{padding-block:25px;background:#fff}.meta-table th,.meta-table td,.meta-table caption{padding:9px;font-size:10px}.meta-examples article{break-inside:avoid;padding:15px}.meta-examples h3,.wallet-steps h3,.expense-grid h3{font-size:23px}.meta-examples p{font-size:10px}.wallet-steps li,.expense-grid article{break-inside:avoid}.wallet-rules{gap:10px}.source-note{font-size:9px}.shared-plan-note{margin-bottom:25px}.maintenance-caption{font-size:8px}}

@@ -95,26 +95,60 @@ $$('[data-route]').forEach(button => button.addEventListener('click', () => {
   $('#routing-explanation').textContent=unanswered?'Primero suena vuestro móvil. Si el equipo no contesta, interviene el asistente tras el tiempo de espera acordado y validado.':'El asistente recibe directamente las llamadas desviadas. La activación y desactivación se hacen desde vuestro móvil.';
 }));
 
-const bundles = Object.freeze({0:{minutes:0,price:0},100:{minutes:100,price:49},250:{minutes:250,price:99},500:{minutes:500,price:179},750:{minutes:750,price:249}});
-const currency=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+const currency=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'});
+const amount=cents=>currency.format(cents/100);
 let billingPeriod='paid';
 function updateBilling(){
  const initial=billingPeriod==='initial';
- const selected=bundles[$('#call-bundle').value];
- const base=initial?0:100;
- const fee=initial?0:197;
- const missing=initial&&selected.minutes===0;
  $$('[data-period]').forEach(button=>{const active=button.dataset.period===billingPeriod;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
- $('#call-bundle').options[0].textContent=initial?'Elige un bono para empezar':'Solo los 100 min incluidos';
- $('#billing-label').textContent=initial?'SOLO BONO · SIN IVA':'CUOTA + BONO · SIN IVA';
- $('#billing-total').textContent=missing?'—':currency.format(fee+selected.price);
- $('#billing-minutes').textContent=missing?'Elige un bono':`${base+selected.minutes} min`;
- $('#billing-detail').textContent=initial?'Primeros 30 días · sin 100 min base':`${base} incluidos + ${selected.minutes} adicionales`;
- $('#billing-explanation').textContent=missing?'Mantenimiento 0 €. Seleccionad el bono de inicio; los 100 min incluidos comienzan con la primera cuota, desde el día 31.':initial?`Mantenimiento 0 €. ${currency.format(selected.price)} por el bono elegido: ${selected.minutes} minutos. Sin cuota ni otros 100 min de base.`:`${currency.format(fee)} de cuota + ${currency.format(selected.price)} de bono adicional = ${currency.format(fee+selected.price)} para ${base+selected.minutes} minutos. Los 100 de base ya están incluidos en la cuota.`;
- $('#call-equivalent').textContent=missing?'La elección se ajusta al volumen atendido por el agente.':`Equivale aproximadamente a ${Math.floor((base+selected.minutes)/3)} llamadas de 3 minutos. Ejemplo, no garantía.`;
+ $('#billing-plan').disabled=initial;
+ const fields=[$('#voice-minutes'),$('#ai-replies'),$('#meta-estimate')];
+ const valid=fields.every(field=>field.value.trim()!=='' && field.validity.valid && Number.isFinite(Number(field.value)) && Number(field.value)>=0);
+ if(!valid){
+   $('#billing-total').textContent='—';
+   $$('.billing-lines dd').forEach(node=>node.textContent='—');
+   $('#billing-explanation').textContent='Introducid valores válidos: minutos e importe Meta desde 0, y respuestas enteras desde 0. No se calcula un total con datos vacíos o negativos.';
+   $('#plan-comparison').textContent='';
+   return;
+ }
+ const minutes=Number(fields[0].value);
+ const replies=Number(fields[1].value);
+ const voiceSeconds=Math.round(minutes*60);
+ if(!Number.isSafeInteger(voiceSeconds)||!Number.isSafeInteger(replies)){
+   $('#billing-total').textContent='—';
+   $$('.billing-lines dd').forEach(node=>node.textContent='—');
+   $('#billing-explanation').textContent='El consumo introducido es demasiado grande para este ejemplo.';
+   $('#plan-comparison').textContent='';
+   return;
+ }
+ const plan=$('#billing-plan').value;
+ const result=ProposalPricing.estimate({period:billingPeriod,plan,voiceSeconds,replies,metaEUR:Number(fields[2].value)});
+ $('#billing-total').textContent=amount(result.totalCents);
+ $('#billing-fee').textContent=currency.format(result.fee);
+ $('#billing-voice').textContent=amount(result.voiceCents);
+ $('#billing-replies').textContent=amount(result.replyCents);
+ $('#billing-meta').textContent=amount(result.metaCents);
+ $('#billing-wallet').textContent=amount(result.walletCents);
+ $('#billing-net').textContent=amount(result.netCents);
+ $('#billing-vat').textContent=amount(result.vatCents);
+ const extraMinutes=new Intl.NumberFormat('es-ES',{maximumFractionDigits:2}).format(result.extraSeconds/60);
+ $('#billing-explanation').textContent=initial
+   ?'Primeros 30 días: cuota 0 €. Todo el uso IA se paga por consumo: sin 100 min ni 500 respuestas incluidos y sin modalidad ilimitada. Meta se suma si corresponde.'
+   :plan==='unlimited'
+   ?'Periodo pagado de IA ilimitada: voz y respuestas IA sin exceso. El consumo del monedero de este ejemplo corresponde solo a Meta.'
+   :extraMinutes+' min y '+result.extraReplies+' respuestas IA por encima de lo incluido. Meta se suma de forma independiente.';
+ const saving=result.standardNetCents-result.unlimitedNetCents;
+ $('#plan-comparison').textContent=initial
+   ?'El plan seleccionado se aplica desde el día 31. No incluye la implantación de 997 € + IVA.'
+   :saving>0
+   ?'Para este mismo uso, la ilimitada reduce el total en '+amount(saving)+' sin IVA. Meta es el mismo en ambos ejemplos.'
+   :saving<0
+   ?'Para este mismo uso, la flexible cuesta '+amount(-saving)+' menos, sin IVA. Meta es el mismo en ambos ejemplos.'
+   :'Con este uso, ambos planes tienen el mismo coste. Meta es el mismo en ambos ejemplos.';
 }
 $$('[data-period]').forEach(button=>button.addEventListener('click',()=>{billingPeriod=button.dataset.period;updateBilling();}));
-$('#call-bundle').addEventListener('change',updateBilling);
+$('#billing-plan').addEventListener('change',updateBilling);
+['#voice-minutes','#ai-replies','#meta-estimate'].forEach(selector=>$(selector).addEventListener('input',updateBilling));
 
 function applyMotion(){
   document.body.classList.toggle('motion-paused',motionPaused);
