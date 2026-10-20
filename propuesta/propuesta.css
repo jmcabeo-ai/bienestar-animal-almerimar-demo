@@ -40,3 +40,8 @@
 @media(max-width:360px){.timeline{grid-template-columns:1fr;gap:30px}.hero h1{font-size:56px}}
 @media print{.volume-explorer{display:none!important}}
 .price-comms{font-size:11px;line-height:1.8;color:var(--muted);margin:18px 0 0;font-weight:500}
+.hero-scene{overflow:visible}
+.photo-caption{max-width:270px}
+@media(max-width:600px){.hero-scene{overflow:clip}.incoming{left:17px}.calendar-float{right:15px}.photo-caption{bottom:140px}}
+html{overflow-x:clip}
+@media(max-width:600px){.photo-caption{display:none}}
