@@ -24,6 +24,6 @@ Fuentes: [web del centro](https://www.cvbienestaranimalalmerimar.es/), [servicio
 
 ## Propuesta comercial
 
-La propuesta del 20 de octubre de 2026 está en [/propuesta/](https://jmcabeo-ai.github.io/bienestar-animal-almerimar-demo/propuesta/). Es una página independiente con alcance, inversión y recorrido interactivo de la solución propuesta. Sus interacciones usan datos ficticios y no realizan llamadas, envíos ni reservas. No carga los asistentes de la demo raíz.
+La propuesta del 20 de octubre de 2026 está en [/propuesta/](https://jmcabeo-ai.github.io/bienestar-animal-almerimar-demo/propuesta/). Es una página breve con inversión en portada, alcance, pack de arranque y selector de bonos que diferencia los primeros 30 días de los meses pagados. Implantación 997 € (600 € + 397 €); después de 30 días desde entrega, 197 €/mes con 100 minutos incluidos. Todos los precios sin IVA. Sus interacciones usan datos ficticios y no realizan llamadas, envíos ni reservas. No carga los asistentes de la demo raíz.
 
 Pruebas: `node --test tests/*.test.cjs`. No requiere compilación ni dependencias. La impresión incluye el alcance y las condiciones; el movimiento respeta las preferencias del dispositivo y puede pausarse desde el pie.

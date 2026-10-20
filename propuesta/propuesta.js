@@ -95,16 +95,26 @@ $$('[data-route]').forEach(button => button.addEventListener('click', () => {
   $('#routing-explanation').textContent=unanswered?'Primero suena vuestro móvil. Si el equipo no contesta, interviene el asistente tras el tiempo de espera acordado y validado.':'El asistente recibe directamente las llamadas desviadas. La activación y desactivación se hacen desde vuestro móvil.';
 }));
 
-const numberFormat=new Intl.NumberFormat('es-ES',{maximumFractionDigits:1,useGrouping:'always'});
-function updateVolume(){
-  const fields=[$('#calls'),$('#days'),$('#minutes')];
-  if(fields.some(input=>!input.validity.valid || input.value==='')){$('#volume-total').textContent='—';$('#volume-formula').textContent='Introduce valores dentro de los límites indicados.';return;}
-  const [calls,days,minutes]=fields.map(input=>Number(input.value));
-  const share=Number($('#share').value);
-  $('#volume-total').textContent=numberFormat.format(calls*days*minutes*share);
-  $('#volume-formula').textContent=`${numberFormat.format(calls)} × ${numberFormat.format(days)} × ${numberFormat.format(minutes)} × ${share*100} %`;
+const bundles = Object.freeze({0:{minutes:0,price:0},100:{minutes:100,price:49},250:{minutes:250,price:99},500:{minutes:500,price:179},750:{minutes:750,price:249}});
+const currency=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+let billingPeriod='paid';
+function updateBilling(){
+ const initial=billingPeriod==='initial';
+ const selected=bundles[$('#call-bundle').value];
+ const base=initial?0:100;
+ const fee=initial?0:197;
+ const missing=initial&&selected.minutes===0;
+ $$('[data-period]').forEach(button=>{const active=button.dataset.period===billingPeriod;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+ $('#call-bundle').options[0].textContent=initial?'Elige un bono para empezar':'Solo los 100 min incluidos';
+ $('#billing-label').textContent=initial?'SOLO BONO · SIN IVA':'CUOTA + BONO · SIN IVA';
+ $('#billing-total').textContent=missing?'—':currency.format(fee+selected.price);
+ $('#billing-minutes').textContent=missing?'Elige un bono':`${base+selected.minutes} min`;
+ $('#billing-detail').textContent=initial?'Primeros 30 días · sin 100 min base':`${base} incluidos + ${selected.minutes} adicionales`;
+ $('#billing-explanation').textContent=missing?'Mantenimiento 0 €. Seleccionad el bono de inicio; los 100 min incluidos comienzan con la primera cuota, desde el día 31.':initial?`Mantenimiento 0 €. ${currency.format(selected.price)} por el bono elegido: ${selected.minutes} minutos. Sin cuota ni otros 100 min de base.`:`${currency.format(fee)} de cuota + ${currency.format(selected.price)} de bono adicional = ${currency.format(fee+selected.price)} para ${base+selected.minutes} minutos. Los 100 de base ya están incluidos en la cuota.`;
+ $('#call-equivalent').textContent=missing?'La elección se ajusta al volumen atendido por el agente.':`Equivale aproximadamente a ${Math.floor((base+selected.minutes)/3)} llamadas de 3 minutos. Ejemplo, no garantía.`;
 }
-$$('.volume-inputs input,.volume-inputs select').forEach(input=>input.addEventListener('input',updateVolume));
+$$('[data-period]').forEach(button=>button.addEventListener('click',()=>{billingPeriod=button.dataset.period;updateBilling();}));
+$('#call-bundle').addEventListener('change',updateBilling);
 
 function applyMotion(){
   document.body.classList.toggle('motion-paused',motionPaused);
@@ -120,7 +130,7 @@ function updateScroll(){const max=document.documentElement.scrollHeight-window.i
 window.addEventListener('scroll',()=>{if(!scrollQueued){scrollQueued=true;requestAnimationFrame(updateScroll);}},{passive:true});
 window.addEventListener('resize',updateScroll);
 let printState=[];
-window.addEventListener('beforeprint',()=>{printState=$$('.conditions details').map(node=>node.open);$$('.conditions details').forEach(node=>{node.open=true;});});
-window.addEventListener('afterprint',()=>{$$('.conditions details').forEach((node,index)=>{node.open=printState[index]||false;});});
+window.addEventListener('beforeprint',()=>{printState=$$('.conditions details,.demo-disclosure').map(node=>node.open);$$('.conditions details,.demo-disclosure').forEach(node=>{node.open=true;});});
+window.addEventListener('afterprint',()=>{$$('.conditions details,.demo-disclosure').forEach((node,index)=>{node.open=printState[index]||false;});});
 $('#print-proposal').addEventListener('click',()=>window.print());
-render();updateVolume();updateScroll();
+render();updateBilling();updateScroll();

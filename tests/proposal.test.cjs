@@ -5,10 +5,15 @@ const path=require('node:path');
 const root=path.resolve(__dirname,'../propuesta');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const js=fs.readFileSync(path.join(root,'propuesta.js'),'utf8');
-test('La propuesta conserva precios, pagos y comunicaciones separados',()=>{
-  for(const text of ['1.497','597','748,50','8.661','30 días','sin IVA','Tarifa de comunicaciones pendiente'])assert.ok(html.includes(text),text);
-  assert.match(html,/no una permanencia anual/);
-  assert.match(html,/sin margen adicional de OMNIA/);
+test('La oferta distingue implantación, periodo sin cuota y minutos incluidos',()=>{
+  for(const text of ['997','600 €','397 €','197','30 días','día 31','sin IVA','100 min','49 €','99 €','179 €','249 €'])assert.ok(html.includes(text),text);
+  assert.match(html,/0 € de mantenimiento tras la entrega/);
+  assert.match(html,/cada mes de cuota pagada/);
+  assert.match(html,/sin cuota ni 100 min base/);
+  assert.match(html,/Sin permanencia anual/);
+  assert.match(html,/Sin acumulación entre periodos mensuales/);
+  assert.match(html,/Sin recargas ni cobros sin autorización/);
+  assert.match(html,/sin volver a cobrar los minutos del bono/);
 });
 test('La propuesta no conecta servicios reales ni publica datos internos',()=>{
   assert.doesNotMatch(html+js,/api[_-]?key|Bearer\s|CRITERIO_INTERNO|97 USD|107 USD/i);
