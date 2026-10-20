@@ -21,3 +21,9 @@ Sin compilación, claves privadas o backend propio. Chat y voz se cargan exclusi
 - Sin reseñas inventadas, nombres de equipo, precios o cifras sin verificar.
 
 Fuentes: [web del centro](https://www.cvbienestaranimalalmerimar.es/), [servicios](https://www.cvbienestaranimalalmerimar.es/servicios), [contacto](https://www.cvbienestaranimalalmerimar.es/contacto), [galería](https://www.cvbienestaranimalalmerimar.es/galeria). Derechos de las imágenes de sus titulares. El uso en la preview no implica autorización para la web definitiva.
+
+## Propuesta comercial
+
+La propuesta del 20 de octubre de 2026 está en [/propuesta/](https://jmcabeo-ai.github.io/bienestar-animal-almerimar-demo/propuesta/). Es una página independiente con alcance, inversión y recorrido interactivo de la solución propuesta. Sus interacciones usan datos ficticios y no realizan llamadas, envíos ni reservas. No carga los asistentes de la demo raíz.
+
+Pruebas: `node --test tests/*.test.cjs`. No requiere compilación ni dependencias. La impresión incluye el alcance y las condiciones; el movimiento respeta las preferencias del dispositivo y puede pausarse desde el pie.
